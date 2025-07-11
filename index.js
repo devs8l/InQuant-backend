@@ -1,17 +1,15 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 const app = express();
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
-// MongoDB connection
 mongoose
-  .connect("mongodb+srv://dhruvujjain:Dhruv%402981@cluster0.lvmmjnp.mongodb.net/inquant?retryWrites=true&w=majority", {
-  })
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("✅ Connected to MongoDB"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
-
 // Define schema and model
 const contactSchema = new mongoose.Schema({
   name: String,
